@@ -1,0 +1,30 @@
+.brand_bg {
+    background-image: linear-gradient(to bottom , rgb(179, 247, 179), rgb(158, 158, 238), #fec673);
+    height: 10rem;
+    width: 10rem;
+  border-radius: 50%;
+  position: relative;
+ 
+}
+.brand_img_cloth {
+  height: 10rem;
+  width: 9rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 0.7rem;
+  top: 0rem;
+}
+
+  .brand_img {
+    height: 4rem;
+    width: 10rem;
+}
+  
+
+.brand_card{
+    
+    width: 13rem;
+    
+}
+.brand_container{display: flex;
+    flex-direction: row;}

@@ -1,0 +1,84 @@
+.sign-in-container{
+    width: 33%;
+    position: relative;
+    left: 25rem;
+    /* height: 46%; */
+    background: linear-gradient(to bottom right,#feedf6,#fcf0e2);
+    top: 2rem;
+}
+
+
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.signInContainer {
+    padding: 3px 36px 0;
+}
+.welcome-header {
+    font-family: Assistant;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+.welcome-header-small {
+    font-size: 16px;
+    font-weight: 400;
+    color: #535766;
+}
+.mobileInputContainer {
+    position: relative;
+}
+.mobileInputContainer .form-group {
+    margin-bottom: 24px;
+}
+.form-group {
+    // margin-bottom: 14px;
+    position: relative;
+}
+.mobileInputContainer .form-group .mobileNumberInput {
+    padding-left: 62px;
+}
+.mobileInputContainer .form-group .form-control {
+    border: 1px solid #d4d5d9;
+    font-size: 14px;
+    padding: 11px 12px;
+    line-height: 16px;
+    height: auto;
+    color: #282c3f;
+}
+.mobileInputContainer .form-group input {
+    caret-color: #ff3f6c;
+}
+.mobileInputContainer .form-group .placeholderAlternative {
+    color: #94969f;
+    top: 10px;
+    left: 12px;
+    font-size: 14px;
+    position: absolute;
+    pointer-events: none;
+}
+.mobileInputContainer .midLinks {
+    margin: 0 0 21px;
+    color: rgba(40,44,63,.8);
+    font-size: 12px;
+    font-weight: 600;
+}
+.mobileInputContainer .submitBottomOption {
+    cursor: pointer;
+    background-color: #ff3f6c;
+    text-align: center;
+    padding: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+}
+.get-help {
+    margin: 20px 0px;
+    font-size: small;
+    padding: 0 0 44px 0;
+    font-weight: 600;
+    color: rgba(40,44,63,.8);
+}

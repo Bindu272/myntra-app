@@ -1,0 +1,21 @@
+.profileIcon {
+    /* Your existing styles for .profileIcon */
+  
+    /* Add text-decoration: none to remove the default underline */
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .profileIcon .nav_li {
+    /* Your existing styles for .nav_li */
+  
+    /* Initially, set the text-decoration to none (no underline) */
+    text-decoration: none;
+  }
+  
+  .profileIcon:hover .nav_li {
+    /* When the parent .profileIcon is hovered, add a bottom border (underline) to .nav_li */
+    text-decoration: underline;
+  }
+  

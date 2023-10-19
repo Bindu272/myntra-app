@@ -1,0 +1,25 @@
+.emptyBagContainer{
+    position: relative;
+    left: 29rem;
+    top: 5rem;
+    button{
+        background: #fff;
+        color: #ff3f6c;
+        font-weight: 700;
+        border: 1px solid #ff3f6c;
+        padding: 1rem;
+    }
+}
+.empty-bag-img{
+    height: 164px;
+}
+.emptyText{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 23px;
+}
+.emptyDesc{
+    font-size: 14px;
+    color: #7e818c;
+    padding-bottom: 2rem;
+}
