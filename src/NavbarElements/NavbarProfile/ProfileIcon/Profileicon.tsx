@@ -13,9 +13,9 @@ const Profileicon = () => {
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='profileIcon'>  
     <i className="fa-solid fa-user nav_icon"></i>
     <li className="nav_li ">Profile</li>
-    { (<ProfileDropdown/>)}
+    {isHovered && (<ProfileDropdown/>)}
     </div>
   )
 }
 
-export default Profileicon
+export default Profileicon;
