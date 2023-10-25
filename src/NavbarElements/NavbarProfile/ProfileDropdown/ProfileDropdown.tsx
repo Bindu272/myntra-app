@@ -1,48 +1,48 @@
 import React, { useEffect } from 'react'
 import './ProfileDropdown.scss'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../../../Components/Firebase'
-import { addUser, removeUser } from '../../../Components/Redux/userSlice'
+// import { Link, useNavigate } from 'react-router-dom'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+// import { auth } from '../../../Components/Firebase'
+// import { addUser, removeUser } from '../../../Components/Redux/userSlice'
 const ProfileDropdown = () => {
-const dispatch  =  useDispatch();
-const navigate =  useNavigate();
-const user  = useSelector((store:any)=> store.user);
-const handleSignOut = () =>{
-const auth = getAuth();
-signOut(auth)
-.then(()=> {})
-.catch((error)=>{
-  // navigate('\error');
-  console.log(error)
-})
-  }
-  useEffect(() => {
-    // Create a variable to hold the unsubscribe function
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        navigate("/");
-      } else {
-        dispatch(removeUser(null));
-        navigate("/signInPage");
-      }
-    });
+// const dispatch  =  useDispatch();
+// const navigate =  useNavigate();
+// const user  = useSelector((store:any)=> store.user);
+// const handleSignOut = () =>{
+// const auth = getAuth();
+// signOut(auth)
+// .then(()=> {})
+// .catch((error)=>{
+//   // navigate('\error');
+//   console.log(error)
+// })
+//   }
+//   useEffect(() => {
+//     // Create a variable to hold the unsubscribe function
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         const { uid, email, displayName, photoURL } = user;
+//         dispatch(
+//           addUser({
+//             uid: uid,
+//             email: email,
+//             displayName: displayName,
+//             photoURL: photoURL,
+//           })
+//         );
+//         navigate("/");
+//       } else {
+//         dispatch(removeUser(null));
+//         navigate("/signInPage");
+//       }
+//     });
   
     // Return the unsubscribe function in the cleanup function
-    return () => {
-      unsubscribe(); // Call the unsubscribe function when the component unmounts
-    };
-  }, [dispatch, navigate]);
+  //   return () => {
+  //     unsubscribe(); // Call the unsubscribe function when the component unmounts
+  //   };
+  // }, [dispatch, navigate]);
   
   return (
     <div>
@@ -51,7 +51,9 @@ signOut(auth)
 <div className='container'>
   <h3>Welcome</h3>
   <p>To access account and manage order</p>
-  <button className='profileDropBtn' onClick={handleSignOut}>Logout</button>
+  <button className='profileDropBtn' 
+  // onClick={handleSignOut}
+  >Login / Sign up</button>
   <hr></hr>
   
     <li>Order</li>

@@ -13,6 +13,7 @@ import './Layout.scss'
 
 import AddToCart from '../NavPages/AddToCartPage/AddToCart'
 import SignInPage from '../SignInPage/SignInPage'
+import Beauty from '../NavPages/Beauty/Beauty'
 // import Men
 const Layout = () => {
 //  const location = useLocation();
@@ -28,7 +29,9 @@ const Layout = () => {
         <Route path="/wishlistLogin" element={<WishlistLogin/>}/>
         <Route path='/signInPage' element={<SignInPage/>}/>
         <Route path='/addToCart' element={<AddToCart/>}/>
-        {/* // <Route path='/men' element={<Men/>}/> */}
+        <Route path='/beauty' element={<Beauty/>}/>
+        {/* <Route path='/men' element={<Men/>}/> */}
+        {/* <Route path='/beauty' element={<Beauty/>}/> */}
       </Routes>
     </div>
     <Routes>
