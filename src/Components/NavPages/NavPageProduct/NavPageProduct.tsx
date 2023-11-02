@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Beauty.scss'
+import './NavPageProduct.scss'
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -8,16 +9,21 @@ interface Product {
   image: string;
   description: string;
   price: number;
-  // Add more properties as needed
-}
 
-const Beauty = () => {
+}
+interface NavProductProps {
+  category: string;
+
+}
+const NavPageProduct: React.FC<NavProductProps> = ({ category }) => {
   const [data, setData] = useState<Product[]>([]);
   const [showFullDescriptions, setShowFullDescriptions] = useState<boolean[]>([]); // State for each product
   const DESCRIPTION_LIMIT = 15; // Character limit for short description
-
+  const [wishListItems, setWhishListItems] = useState<number[]>([])
   useEffect(() => {
-    const apiUrl = 'https://fakestoreapi.com/products/category/jewelery';
+
+    const apiUrl = `https://fakestoreapi.com/products/category/${category}`;
+
 
     axios.get(apiUrl)
       .then((response) => {
@@ -28,23 +34,42 @@ const Beauty = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [category]);
 
   const toggleDescription = (index: number) => {
     const newShowFullDescriptions = [...showFullDescriptions];
     newShowFullDescriptions[index] = !showFullDescriptions[index];
     setShowFullDescriptions(newShowFullDescriptions);
   };
+  // const [iconColor, setIconColor]= useState('black')
+  // const handleClick=()=>{
+  //   setIconColor('red')
+  //   alert('Item added to wishlist')
+  // }
+  const handleAddToWishList = (id: number) => {
+    if (wishListItems.includes(id)) {
+      const updatedWishList = wishListItems.filter((item) => item !== id)
+      setWhishListItems(updatedWishList)
+      alert('removed from wishlist')
+    } else {
+      setWhishListItems([...wishListItems, id])
+
+      alert('added to wishlist')
+    }
+  }
 
   return (
     <div>
-      <h1>Beauty Products</h1>
+      <h1>{category} Products</h1>
+
       <div className="product-main-card">
         {data.map((product, index) => (
           <li key={product.id}>
             <div className="product-card">
-              <img src={product.image} alt={product.title} />
-              <h5>{product.title}</h5>
+              <Link to={`/product-detail-page/${product.id}`}>
+                <img src={product.image} alt={product.title} />
+                <h5>{product.title}</h5>
+              </Link>
               <p>
                 {showFullDescriptions[index]
                   ? product.description
@@ -61,15 +86,9 @@ const Beauty = () => {
                   </span>
                 )}
               </p>
-              <h6>{product.price} Rs/-</h6>
-              <div className="product-card-button">
-                <button style={{ border: "1px solid #ff3f6c", background: "transparent" ,}}>
-                  Buy Now
-                </button>
-                <button style={{ background: "#ff3f6c", border: "none",color:'#ffff' }}>
-                  Add To Cart
-                </button>
-                <i className="fa-regular fa-heart nav_icon"></i>
+              <div className="product-card-">
+                <h5>{product.price} Rs/-</h5>
+                <i className="fa-solid fa-heart nav_icon" style={{ color: wishListItems.includes(product.id) ? 'red' : 'grey' }} onClick={() => handleAddToWishList(product.id)}></i>
               </div>
             </div>
           </li>
@@ -79,4 +98,4 @@ const Beauty = () => {
   );
 };
 
-export default Beauty;
+export default NavPageProduct;

@@ -75,9 +75,9 @@ const Nav = () => {
           </li>
           {/* <li className="nav_li nav_item1" onMouseEnter={()=>handleMouseEnter('men')}onMouseLeave={handleMouseLeave} >men </li> */}
        <Link to='/men'> <li className="nav_li nav_item1">men</li></Link> 
-          <li className="nav_li nav_item1" onMouseEnter={()=>handleMouseEnter('women')} onMouseLeave={handleMouseLeave}>women</li>
-       <Link to='/men'> <li className="nav_li nav_item1">kids</li></Link>  
-          <li className="nav_li nav_item1">home & living</li>
+         <Link to='/women'><li className="nav_li nav_item1" >women</li></Link> 
+       <li className="nav_li nav_item1">kids</li>
+        <Link to='/electronic'> <li className="nav_li nav_item1">home & living</li></Link> 
         <Link to='/beauty'><li className="nav_li nav_item1">beauty</li></Link>  
           <li className="nav_li nav_item1 nav_new">studio</li>
           <p className="new">NEW</p>
@@ -90,11 +90,14 @@ const Nav = () => {
              
             />
             <i className="fa-solid fa-magnifying-glass search_icon"></i>
-          </li>{location.pathname !=='/signInPage' &&(<span className="nav_item3">
+          </li>
+          {location.pathname !=='/signInPage' &&(
+            <span className="nav_item3">
           <Profileicon />
-          </span>)}
+          </span>
+          )}
          
-          <div>
+       
           <span className="nav_item3">
             <i className="fa-solid fa-heart nav_icon"></i>
 
@@ -106,12 +109,12 @@ const Nav = () => {
             <li className="nav_li ">Bag</li></Link>
             
           </span>
-          </div>
+       
         </ul>
       </div>
       </nav>
-      <span>{activeItem=== 'men' && (<NavElementDropdown>Men Content</NavElementDropdown>)}</span>
-      {activeItem==='women' &&(<NavElementDropdown>Women</NavElementDropdown>)}
+      {/* <span>{activeItem=== 'men' && (<NavElementDropdown>Men Content</NavElementDropdown>)}</span>
+      {activeItem==='women' &&(<NavElementDropdown>Women</NavElementDropdown>)} */}
     </>
   );
 };

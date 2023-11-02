@@ -1,41 +1,41 @@
 import React from 'react'
 import Navbar from '../Comman/Navbar/Navbar'
-import InviteHome from '../Card/InviteCard/InviteCard'
-import SimpleSlider from '../Carousel/Carousel'
-import Brand from '../Comman/Home/brand/Brand'
-import DealOf from '../Comman/Home/Deal/DealOf'
-import TopPick from '../Comman/Home/Top/TopPick'
 import '../Comman/Home/Home.scss'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import WishlistLogin from '../NavPages/WishList/WishlistLoginpage/WishlistLogin'
 import Home from '../Comman/Home/Home'
 import './Layout.scss'
-
 import AddToCart from '../NavPages/AddToCartPage/AddToCart'
 import SignInPage from '../SignInPage/SignInPage'
-import Beauty from '../NavPages/Beauty/Beauty'
+import Beauty from '../NavPages/NavPageProduct/NavPageProduct'
+import ProductDetailPage from '../../Pages/ProductDetailPage/ProductDetailPage'
+import { CartProvider } from '../NavPages/AddToCartPage/CartContext'
 // import Men
 const Layout = () => {
 //  const location = useLocation();
 //  const renderFlatSection = !location.pathname.includes('/signInPage');
-  return (
-   
+  return (   
     <Router >
+      <CartProvider>
     <Navbar/>
-    
     <div className='LayoutBody'>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path="/wishlistLogin" element={<WishlistLogin/>}/>
+        <Route path="/wishlistLogin" element={<WishlistLogin />}/>
         <Route path='/signInPage' element={<SignInPage/>}/>
         <Route path='/addToCart' element={<AddToCart/>}/>
-        <Route path='/beauty' element={<Beauty/>}/>
-        {/* <Route path='/men' element={<Men/>}/> */}
-        {/* <Route path='/beauty' element={<Beauty/>}/> */}
+        <Route path='/beauty' element={<Beauty category="jewelery"/>}/>
+        <Route path='/women' element={<Beauty category="women's clothing"/>}/>
+        <Route path='/men' element={<Beauty category="men's clothing"/>}/>
+        <Route path='/electronic' element={<Beauty category="electronics"/>}/>
+        <Route path='/product-detail-page/:productId' element={<ProductDetailPage/>}/>    
       </Routes>
     </div>
     <Routes>
       <Route path='/signInPage' element={null}/>
+      <Route path='/wishlistLogin' element={null}/>
+      <Route path='/product-detail-page/:productId' element={null}/>
+      <Route path='/addToCart' element={null}/>
       <Route path='*'
       element={
         <div className="flat">
@@ -47,11 +47,8 @@ const Layout = () => {
           </h1>
           </div>}/>
     </Routes>    
-    </Router>
-   
-    
-    
-  
+    </CartProvider>
+    </Router>  
   )
 }
 

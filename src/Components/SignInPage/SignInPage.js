@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfil
 import { ValidateForm } from '../validate';
 import {auth} from '../Firebase'
 // import { useDispatch } from 'react-redux';
-import { addUser } from '../Redux/userSlice';
+import { addUser } from '../../Redux/userSlice';
 
 const SignInPage = () => {
   // const dispatch = useDispatch();

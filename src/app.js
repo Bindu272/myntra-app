@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import appStore from './Components/Redux/appStore'
+import appStore from './Redux/appStore'
 import Layout from './Components/Layout/Layout'
 
 const App = () => {
