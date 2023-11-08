@@ -32,6 +32,11 @@
     /* display: flex;
     justify-content: space-around; */
     padding-right: 2rem;
+    sup{
+      color: #fa286e;
+      font-size: 10px;
+      font-weight: 600;
+    }
     
   }
   .nav_input{
@@ -63,17 +68,7 @@
   input::placeholder {
       font: 13px sans-serif;
   }
-  .nav_new{
-    position: relative;
-  }
-  .new{
-    position: absolute;
-    left: 41.3rem;
-    top:10px;
-    color: #fa286e;
-    font-size: 10px;
-    font-weight: 600;
-  }
+  
   .nav_li{
     a{
       text-decoration: none;

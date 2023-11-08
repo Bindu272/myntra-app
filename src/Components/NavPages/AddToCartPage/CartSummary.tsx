@@ -3,6 +3,7 @@ interface CartSummaryProps{
     totalPrice:number
 }
 const CartSummary:React.FC<CartSummaryProps> = ({ totalPrice }) => {
+  console.log('Totalprice',totalPrice)
   return (
     <div className="col-12 col-sm-5  p-3">
    
@@ -29,7 +30,7 @@ const CartSummary:React.FC<CartSummaryProps> = ({ totalPrice }) => {
           <span className="text-decoration-line-through text-secondary">
             &#8377; 69
           </span> FREE
-        </span>
+      </span>
       </div>
       <div className="d-flex justify-content-between fs-6 fw-bolder mt-3">
         <span>TOTAL AMOUNT</span>
