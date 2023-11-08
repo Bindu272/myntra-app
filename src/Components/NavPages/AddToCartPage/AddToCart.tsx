@@ -3,23 +3,23 @@ import './AddToCart.scss'
 import { useCart } from './CartContext'
 import CartSummary from './CartSummary';
 
-
-
-
 const AddToCart = () => {
   const { cart, dispatch } = useCart();
-const [selectedOption, setSelectedOption] = useState(1)
-console.log("selectedoption", selectedOption)
- const handleSelectChange=(event:any)=>{
-  setSelectedOption(event.target.value) 
- }
+  const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: number }>({});
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: string) => {
+    const newSelectedOptions = { ...selectedOptions, [itemId]: parseInt(event.target.value) };
+    setSelectedOptions(newSelectedOptions);
+  };
   const options:any =[];
   for (let i=1; i<=10; i++){
     options.push(<option key={i} value={i}>{i}</option>);
   }
 const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* selectedOption) 
-  const totalPrice = cart.items.reduce((total:any, item:any)=>total + item.price , 0)
+  const totalPrice = cart.items.reduce((total:any, item:any)=>{
+    const selectedOption = selectedOptions[item.id] || 1;
+    return total + (item.price * selectedOption)
+  },0)
   return (
     
     <>
@@ -78,9 +78,14 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
                       <h6 className="d-block">{item.title}</h6>
                     <p className="d-block small">{item.description}</p>
                       {/*   <span className="d-block">Brand</span> */}
-                      <select onChange={handleSelectChange}>{options}</select>
-                    {/* <h1>{selectedOption}</h1> */}
-                      <h6 className="d-block">{item.price * selectedOption} <span className='small'>Rs/-</span></h6>
+                      <select
+                            onChange={(event) => handleSelectChange(event, item.id)}
+                            value={selectedOptions[item.id] || 1}
+                          >
+                            {options}
+                          </select>
+                          <h1>{selectedOptions[item.id] || 1}</h1>
+                          <h6 className="d-block">{calculateTotalPrice(item, selectedOptions[item.id] || 1)} <span className='small'>Rs/-</span></h6>
                      <p>{}</p>
                     </div>
                   </div>

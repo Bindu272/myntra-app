@@ -79,8 +79,8 @@ const Nav = () => {
        <li className="nav_li nav_item1">kids</li>
         <Link to='/electronic'> <li className="nav_li nav_item1">home & living</li></Link> 
         <Link to='/beauty'><li className="nav_li nav_item1">beauty</li></Link>  
-          <li className="nav_li nav_item1 nav_new">studio</li>
-          <p className="new">NEW</p>
+          <li className="nav_li nav_item1 nav_new">studio <sup>NEW</sup></li>
+        
           <li className="nav_li nav_item2"> 
             <input
               className="nav_input"
