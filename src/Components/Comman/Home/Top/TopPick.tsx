@@ -10,9 +10,9 @@ const TopPick = () => {
         {top.map((elem) => {
           const { id, image,  } = elem;
           return (
-            <div className="top_image_card">
-              <div className="top_image ">
-                <img src={image} alt=".." className="imgs" />
+            <div className="card border-0">
+              <div >
+                <img src={image} alt=".." className="card-img-top img_deal" />
               </div>
               {/* <div className="top_text text-center pt-2">
                 <p style={{fontWeight:"bold"}}>{name}</p>

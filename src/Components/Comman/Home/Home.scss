@@ -17,3 +17,8 @@
     right: -10.4rem;
     transform: rotate(-90deg);
 }
+@media (max-width: 768px) {
+    .brand-container {
+      display: none;
+    }
+  }

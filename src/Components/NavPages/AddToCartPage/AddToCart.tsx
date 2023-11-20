@@ -84,7 +84,7 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
                           >
                             {options}
                           </select>
-                          <h1>{selectedOptions[item.id] || 1}</h1>
+                          {/* <h1>{selectedOptions[item.id] || 1}</h1> */}
                           <h6 className="d-block">{calculateTotalPrice(item, selectedOptions[item.id] || 1)} <span className='small'>Rs/-</span></h6>
                      <p>{}</p>
                     </div>

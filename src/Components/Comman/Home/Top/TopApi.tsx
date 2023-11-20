@@ -27,6 +27,13 @@ export const tops =[
         // price:"799"
 
     },
+    {
+        id:5,
+        image:"./Images/myb-3.webp",
+        // name:"Kurta Sets",
+        // price:"1299"
+
+    },
     // {
     //     id:5,
     //     image:"./Images/tshirt.png",

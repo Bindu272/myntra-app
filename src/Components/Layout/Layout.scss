@@ -3,6 +3,9 @@
       background: #ffffff;
       // background: linear-gradient(to bottom right,#feedf6,#fcf0e2);
       height: 73vh;
+      @media (max-width: 768px) {
+            padding: 0;
+      }
 }
 .signInBackground{
       background: #ffffff;
