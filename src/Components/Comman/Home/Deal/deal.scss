@@ -29,7 +29,15 @@
  margin: 0;
  
 }
+@media (max-width: 768px) {
+  .img_deal {
+    height: 100%; 
+  }
 
+  // .card {
+  //   margin: 2%; 
+  // }
+}
 .transparent_position {
   background: rgba(255, 255, 255, 0.6);
   width: 90%;

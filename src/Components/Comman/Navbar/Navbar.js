@@ -74,11 +74,11 @@ const Nav = () => {
            
           </li>
           {/* <li className="nav_li nav_item1" onMouseEnter={()=>handleMouseEnter('men')}onMouseLeave={handleMouseLeave} >men </li> */}
-       <Link to='/men'> <li className="nav_li nav_item1">men</li></Link> 
-         <Link to='/women'><li className="nav_li nav_item1" >women</li></Link> 
+       <li className="nav_li nav_item1">  <Link to='/men'>men</Link></li>
+         <li className="nav_li nav_item1" ><Link to='/women'>women</Link></li>
        <li className="nav_li nav_item1">kids</li>
-        <Link to='/electronic'> <li className="nav_li nav_item1">home & living</li></Link> 
-        <Link to='/beauty'><li className="nav_li nav_item1">beauty</li></Link>  
+         <li className="nav_li nav_item1"><Link to='/electronic'>home & living</Link></li>
+       <li className="nav_li nav_item1"> <Link to='/beauty'>beauty</Link></li>  
           <li className="nav_li nav_item1 nav_new">studio <sup>NEW</sup></li>
         
           <li className="nav_li nav_item2"> 
@@ -104,9 +104,10 @@ const Nav = () => {
             <li className="nav_li "><Link to='/wishlistLogin'>Wishlist</Link> </li>
           </span>
           <span className="nav_item3">
-            <Link to='/addToCart'>
+          
             <i className="fa-solid fa-bag-shopping nav_icon"></i>
-            <li className="nav_li ">Bag</li></Link>
+            <li className="nav_li ">
+            <Link to='/addToCart'>Bag</Link></li>
             
           </span>
        

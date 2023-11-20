@@ -37,6 +37,7 @@
       font-size: 10px;
       font-weight: 600;
     }
+  
     
   }
   .nav_input{
@@ -72,6 +73,30 @@
   .nav_li{
     a{
       text-decoration: none;
-      color: black;
+      color: black !important;
+    }
+  }
+  @media (max-width: 576px) {
+    .nav_background {
+      padding: 0.3rem;
+    }
+  
+    .nav_item1 {
+      font-size: small; 
+      padding-right: 0.5rem; 
+    }
+  
+    .nav_input {
+      padding-left: 15px !important;
+      height: 25px; 
+    }
+  
+    .search_icon {
+      top: 5px;
+      left: 5px;
+    }
+  
+    .nav_item3 {
+      font-size: xx-small; 
     }
   }

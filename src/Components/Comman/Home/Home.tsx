@@ -13,9 +13,13 @@ const Home = () => {
       <InviteHome/>
     {/* <SimpleSlider/> */}
     <h1 className="data">{data1}</h1>
+  
     <DealOf/>
+    <div className="brand-container">
     <h1 className="data">{data4}</h1>
     <Brand/>
+    </div>
+    
     <h1 className="data">{data2}</h1>
     <TopPick/>
     
