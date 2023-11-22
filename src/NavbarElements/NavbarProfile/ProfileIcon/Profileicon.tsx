@@ -4,15 +4,12 @@ import './ProfileIcon.scss'
 const Profileicon = () => {
     const [isHovered, setIsHovered]=useState(false)
     const handleMouseEnter=()=>{
-        setIsHovered(true);
-    }
-    const handleMouseLeave=()=>{
-        setIsHovered(false)
+        setIsHovered(!isHovered);
     }
   return (
-    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='profileIcon'>  
+    <div className='profileIcon'>  
     <i className="fa-solid fa-user nav_icon"></i>
-    <li className="nav_li ">Profile</li>
+    <li className="nav_li "  onClick={handleMouseEnter}>Profile</li>
     {isHovered && (<ProfileDropdown/>)}
     </div>
   )
