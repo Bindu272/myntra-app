@@ -1,63 +1,63 @@
 import React, { useEffect, useState } from "react";
 import './Navbar.scss'
 import Profileicon from "../../../NavbarElements/NavbarProfile/ProfileIcon/Profileicon";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import NavElementDropdown from "../../../NavbarElements/NavElementsDropdown/NavElementDropdown";
 
 import { Link } from 'react-router-dom'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-// import { auth } from '../../Firebase'
-// import { addUser, removeUser } from '../../Redux/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth } from '../../Firebase'
+import { addUser, removeUser } from '../../../Redux/userSlice'
 
 const Nav = () => {
-//   const dispatch  =  useDispatch();
-// const navigate =  useNavigate();
-// const user  = useSelector((store)=> store.user);
-// const handleSignOut = () =>{
-// const auth = getAuth();
-// signOut(auth)
-// .then(()=> {})
-// .catch((error)=>{
-//   // navigate('\error');
-//   console.log(error)
-// })
-//   }
-//   useEffect(() => {
-//     // Create a variable to hold the unsubscribe function
-//     const unsubscribe = onAuthStateChanged(auth, (user) => {
-//       if (user) {
-//         const { uid, email, displayName, photoURL } = user;
-//         dispatch(
-//           addUser({
-//             uid: uid,
-//             email: email,
-//             displayName: displayName,
-//             photoURL: photoURL,
-//           })
-//         );
-//         navigate("/");
-//       } else {
-//         dispatch(removeUser(null));
-//         navigate("/signInPage");
-//       }
-//     });
+  const dispatch  =  useDispatch();
+const navigate =  useNavigate();
+const user  = useSelector((store)=> store.user);
+const handleSignOut = () =>{
+const auth = getAuth();
+signOut(auth)
+.then(()=> {})
+.catch((error)=>{
+  // navigate('\error');
+  console.log(error)
+})
+  }
+  useEffect(() => {
+    // Create a variable to hold the unsubscribe function
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/");
+      } else {
+        dispatch(removeUser());
+        navigate("/signInPage");
+      }
+    });
   
-//     // Return the unsubscribe function in the cleanup function
-//     return () => {
-//       unsubscribe(); // Call the unsubscribe function when the component unmounts
-//     };
-//   }, [dispatch, navigate]);
+    // Return the unsubscribe function in the cleanup function
+    return () => {
+      unsubscribe(); // Call the unsubscribe function when the component unmounts
+    };
+  }, [dispatch, navigate]);
   
   const [activeItem, setActiveItem] = useState()
 
-  const handleMouseEnter = (item) => {
-    setActiveItem(item);
-  };
+  // const handleMouseEnter = (item) => {
+  //   setActiveItem(item);
+  // };
 
-  const handleMouseLeave = () => {
-    setActiveItem(null);
-  };
+  // const handleMouseLeave = () => {
+  //   setActiveItem(null);
+  // };
   const location=useLocation();
   return (
     <>
