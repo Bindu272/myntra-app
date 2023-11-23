@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './AddToCart.scss'
 import { useCart } from './CartContext'
 import CartSummary from './CartSummary';
+import { Link } from 'react-router-dom';
 
 const AddToCart = () => {
   const { cart, dispatch } = useCart();
@@ -28,7 +29,7 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
         <img src='./Images/empty-bag.webp' alt='emptyCart' className='empty-bag-img'/>
         <div className='emptyText'>Hey, it feels so light!</div>
         <div className='emptyDesc'>There is nothing in your bag. Let's add some items.</div>
-        <button>ADD ITEMS FROM WISHLIST</button>
+        <button><Link to='/wishlistLogin'>ADD ITEMS FROM WISHLIST</Link></button>
     </div>
     ):(
     <div>

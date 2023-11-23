@@ -24,13 +24,23 @@ const cartReducer = (state, action) => {
         ...state,
         items:action.payload,
       }
+      case 'ADD_TO_WISHLIST':
+        return{
+          ...state,
+          wishListItems:[...state.wishListItems, action.payload],
+        }
+        case 'REMOVE_FROM_WISHLIST':
+          return{
+            ...state,
+            wishListItems:state.wishListItems.filter(item=>item!==action.payload)
+          }
     default:
       return state;
   }
 };
 
 export const CartProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+  const [cart, dispatch] = useReducer(cartReducer, { items: [], wishListItems:[] });
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>

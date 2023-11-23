@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './WishlistLogin.scss'
 import { Link } from 'react-router-dom';
+import { useCart } from '../../AddToCartPage/CartContext';
+import { title } from 'process';
 
 const WishlistLogin = () => {
+  const [isAddedToBag, setIsAddedToBag]=useState<string[]>([]);
+  const {cart, dispatch}= useCart();
+  const {wishListItems}=cart
+
+  const handleAddToCart=(product: any)=>{
+    dispatch({type:'ADD_TO_CART',payload:product})
+    setIsAddedToBag((prevItems) => [...prevItems, product.id]);
+
+}
   return (
-    <div className='wishlistLogin-container'>
+    <>{wishListItems.length>0?( <div className='wishlist-main-card'>
+   {wishListItems.map((itemId:any, index:any)=>(
+      <li key={itemId.id}>
+        <div >
+          <img src={itemId.image} alt={itemId.title}/>
+          <h5>{itemId.title}</h5>
+          <h6>{itemId.price} Rs/-</h6>
+          <button onClick={()=>{
+                               if(!isAddedToBag.includes(itemId.id)){
+                                handleAddToCart(itemId)
+                               }
+                            }}disabled={isAddedToBag.includes(itemId.id)} style={{ background: "#ff3f6c", border: "none", color: '#ffff', marginRight: '2rem' }}>
+                                {isAddedToBag.includes(itemId.id)?'Added to Bag':'Add To Bag'} <i className="fa-solid fa-bag-shopping nav_icon"></i>
+                            </button>
+        </div>
+        {/* <p>{itemId.title}</p> */}
+      </li>
+    ))}</div>):(
+      <div className='wishlistLogin-container'>
       <div className='wishlistLogin-heading'>
         PLEASE LOG IN
       </div>
@@ -14,7 +43,8 @@ const WishlistLogin = () => {
         <button ><Link to='/signInPage'>LOGIN</Link></button>
       </div>
     </div>
-    // <h1>Wishlist items</h1>
+    )}
+      </>
   )
 }
 

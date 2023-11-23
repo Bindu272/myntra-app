@@ -23,9 +23,10 @@ const ProductDetailPage: React.FC = () => {
             const updatedWishList = wishListItems.filter((item) => item !== id)
             setWhishListItems(updatedWishList)
             // alert('removed')
+            dispatch({type:'REMOVE_FROM_WISHLIST', payload:product})
         } else {
             setWhishListItems([...wishListItems, id])
-
+dispatch({type:'ADD_TO_WISHLIST', payload:product})
             // alert('added')
         }
     }
@@ -69,8 +70,9 @@ const ProductDetailPage: React.FC = () => {
                                if(!isAddedToBag){
                                 handleAddToCart(product)
                                }
-                            }}disabled={isAddedToBag} style={{ background: "#ff3f6c", border: "none", color: '#ffff', marginRight: '2rem' }}>
-                                {isAddedToBag?'Added to Bag':'Add To Bag'} <i className="fa-solid fa-bag-shopping nav_icon"></i>
+                            }}
+                            disabled={isAddedToBag} style={{ background: "#ff3f6c", border: "none", color: '#ffff', marginRight: '2rem' }}>
+                                {isAddedToBag ? 'Added to Bag':'Add To Bag'} <i className="fa-solid fa-bag-shopping nav_icon"></i>
                             </button>
                             <button
                                 onClick={() => handleAddToWishList(product.id)}
