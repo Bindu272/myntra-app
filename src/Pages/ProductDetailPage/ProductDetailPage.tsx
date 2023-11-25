@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './ProductDetailPage.scss'
-import { useCart } from '../../Components/NavPages/AddToCartPage/CartContext';
+import { useCart, } from '../../Components/NavPages/AddToCartPage/CartContext';
 
 interface Product {
     id: number;
@@ -17,19 +17,16 @@ const ProductDetailPage: React.FC = () => {
     const {cart, dispatch}=useCart()
     const [isAddedToBag, setIsAddedToBag]=useState(false)
     const [product, setProduct] = useState<Product | null>(null); // Initialize with null
-    const [wishListItems, setWhishListItems] = useState<number[]>([])
-    const handleAddToWishList = (id: number) => {
-        if (wishListItems.includes(id)) {
-            const updatedWishList = wishListItems.filter((item) => item !== id)
-            setWhishListItems(updatedWishList)
-            // alert('removed')
-            dispatch({type:'REMOVE_FROM_WISHLIST', payload:product})
-        } else {
-            setWhishListItems([...wishListItems, id])
-dispatch({type:'ADD_TO_WISHLIST', payload:product})
-            // alert('added')
-        }
+
+    const {wishListItems}=cart;
+
+const handleAddToWishList = (product: Product) => {
+    if (wishListItems.some((item: { id: any; }) => item.id === product.id)) {
+      dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product });
+    } else {
+      dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
     }
+  };
     const productInCart = product ? cart.items.find((item: { id: number; }) => item.id === product.id) : null;
 
     useEffect(()=>{
@@ -74,8 +71,8 @@ dispatch({type:'ADD_TO_WISHLIST', payload:product})
                             disabled={isAddedToBag} style={{ background: "#ff3f6c", border: "none", color: '#ffff', marginRight: '2rem' }}>
                                 {isAddedToBag ? 'Added to Bag':'Add To Bag'} <i className="fa-solid fa-bag-shopping nav_icon"></i>
                             </button>
-                            <button
-                                onClick={() => handleAddToWishList(product.id)}
+                            {/* <button
+                                onClick={() => handleAddToWishList(product)}
                                 style={{
                                     border: wishListItems.includes(product.id) ? 'none' : '1px solid #ff3f6c',
                                     background: wishListItems.includes(product.id) ? 'grey' : 'transparent',
@@ -89,7 +86,23 @@ dispatch({type:'ADD_TO_WISHLIST', payload:product})
                                     }}
                                 ></i>
 
-                            </button>
+                            </button> */}
+                            <button
+    onClick={() => handleAddToWishList(product)}
+    style={{
+        border: wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'none' : '1px solid #ff3f6c',
+        background: wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'grey' : 'transparent',
+        color: wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'white' : 'black'
+    }}
+>
+    {wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'Wishlisted' : 'Wishlist'}   <i
+        className="fa-solid fa-heart nav_icon"
+        style={{
+            color: wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'red' : 'grey',
+        }}
+    ></i>
+</button>
+
 
                         </span>
                     </div>

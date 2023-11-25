@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NavPageProduct.scss'
 import { Link } from 'react-router-dom';
+import { useCart } from '../AddToCartPage/CartContext';
 
 interface Product {
   id: number;
@@ -19,7 +20,10 @@ const NavPageProduct: React.FC<NavProductProps> = ({ category }) => {
   const [data, setData] = useState<Product[]>([]);
   const [showFullDescriptions, setShowFullDescriptions] = useState<boolean[]>([]); // State for each product
   const DESCRIPTION_LIMIT = 15; // Character limit for short description
-  const [wishListItems, setWhishListItems] = useState<number[]>([])
+  // const [wishListItems, setWhishListItems] = useState<number[]>([])
+  
+  const {cart, dispatch}=useCart()
+  const wishListItems=cart.wishListItems
   useEffect(() => {
 
     const apiUrl = `https://fakestoreapi.com/products/category/${category}`;
@@ -46,18 +50,43 @@ const NavPageProduct: React.FC<NavProductProps> = ({ category }) => {
   //   setIconColor('red')
   //   alert('Item added to wishlist')
   // }
-  const handleAddToWishList = (id: number) => {
-    if (wishListItems.includes(id)) {
-      const updatedWishList = wishListItems.filter((item) => item !== id)
-      setWhishListItems(updatedWishList)
-      alert('removed from wishlist')
+  // const handleAddToWishList = (id: any, product:any) => {
+  //   if (wishListItems.includes(id)) {
+  //     const updatedWishList = wishListItems.filter((item) => item !== id)
+  //     setWhishListItems(updatedWishList)
+  //     alert('removed from wishlist')
+  //     dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product });
+  //   } else {
+  //     setWhishListItems([...wishListItems, id])
+
+  //     alert('added to wishlist')
+  //     dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
+  //   }
+  // }
+  // const handleAddToWishList = (product: Product) => {
+  //   const productId = product.id;
+
+  //   // Check if the product is already in the wishlist
+  //   const isProductInWishlist = wishListItems.some((item: { id: any; }) => item.id === productId);
+
+  //   if (isProductInWishlist) {
+  //     dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product });
+  //   } else {
+  //     dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
+  //   }
+  // };
+  const handleAddToWishList = (product: Product) => {
+    const productId = product.id;
+
+    // Check if the product is already in the wishlist
+    const isProductInWishlist = wishListItems.some((item: { id: any; }) => item.id === productId);
+
+    if (isProductInWishlist) {
+      dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product });
     } else {
-      setWhishListItems([...wishListItems, id])
-
-      alert('added to wishlist')
+      dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
     }
-  }
-
+  };
   return (
     <div>
       <h1>{category} Products</h1>
@@ -88,7 +117,14 @@ const NavPageProduct: React.FC<NavProductProps> = ({ category }) => {
               </p>
               <div className="product-card-">
                 <h5>{product.price} Rs/-</h5>
-                <i className="fa-solid fa-heart nav_icon" style={{ color: wishListItems.includes(product.id) ? 'red' : 'grey' }} onClick={() => handleAddToWishList(product.id)}></i>
+                {/* <i className="fa-solid fa-heart nav_icon" style={{ color: wishListItems.includes(product.id) ? 'red' : 'grey' }} onClick={() => handleAddToWishList(product)}></i> */}
+                <i
+        className="fa-solid fa-heart nav_icon"
+        style={{
+          color: wishListItems.some((item: { id: any; }) => item.id === product.id) ? 'red' : 'grey',
+        }}
+        onClick={() => handleAddToWishList(product)}
+      ></i>
               </div>
             </div>
           </li>

@@ -7,7 +7,12 @@ import { Link } from 'react-router-dom';
 const AddToCart = () => {
   const { cart, dispatch } = useCart();
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: number }>({});
-
+  const handleRemove = (itemId: string) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: { id: itemId } });
+  };
+  const handleRemoveAll = () => {
+    dispatch({ type: 'REMOVE_ALL_FROM_CART' });
+  };
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: string) => {
     const newSelectedOptions = { ...selectedOptions, [itemId]: parseInt(event.target.value) };
     setSelectedOptions(newSelectedOptions);
@@ -57,7 +62,7 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
                 </div>
                 <div className="d-flex fw-bold text-secondary fs-6-override align-items-center">
                   <div className="border-end border-2 pe-2">
-                    <span>REMOVE</span>
+                    <span onClick={handleRemoveAll} style={{cursor:'pointer'}}>REMOVE</span>
                   </div>
                   <div className="ps-2">
                     <span>MOVE TO WISHLIST</span>
@@ -68,16 +73,21 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
               <div className="border p-2 d-flex ">
                
                     <div className="w-25">
+                    <Link to={`/product-detail-page/${item.id}`}>
                     <img
                       src={item.image}
                       alt={item.title}
                       className="w-100"
                     />
+                    </Link>
                   </div>
                   <div className="justify-content-start w-75">
-                    <div className="m-4">
+                    <div className="m-4" >
+                       <Link to={`/product-detail-page/${item.id}`} style={{color:'black'}}>
                       <h6 className="d-block">{item.title}</h6>
+                     
                     <p className="d-block small">{item.description}</p>
+                    </Link>
                       {/*   <span className="d-block">Brand</span> */}
                       <select
                             onChange={(event) => handleSelectChange(event, item.id)}
@@ -87,11 +97,11 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
                           </select>
                           {/* <h1>{selectedOptions[item.id] || 1}</h1> */}
                           <h6 className="d-block">{calculateTotalPrice(item, selectedOptions[item.id] || 1)} <span className='small'>Rs/-</span></h6>
-                     <p>{}</p>
+                          {/* <button onClick={() => handleRemove(item.id)} style={{backgroundColor:'#ff3f6c', color:'white', border:'none'}} >Remove</button> */}
                     </div>
                   </div>
                   <div className="justify-content-end">
-                    <i className="bi bi-x-lg"></i>
+                  <i className="fa-solid fa-x" onClick={() => handleRemove(item.id)} style={{cursor:'pointer'}}></i>
                   </div>
               
               </div>

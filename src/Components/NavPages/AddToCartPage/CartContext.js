@@ -24,6 +24,11 @@ const cartReducer = (state, action) => {
         ...state,
         items:action.payload,
       }
+      case 'REMOVE_ALL_FROM_CART':
+        return {
+          ...state,
+          items: [],
+        };
       case 'ADD_TO_WISHLIST':
         return{
           ...state,
@@ -32,7 +37,7 @@ const cartReducer = (state, action) => {
         case 'REMOVE_FROM_WISHLIST':
           return{
             ...state,
-            wishListItems:state.wishListItems.filter(item=>item!==action.payload)
+            wishListItems:state.wishListItems.filter(item=>item.id!==action.payload.id)
           }
     default:
       return state;
