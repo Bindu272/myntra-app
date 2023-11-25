@@ -2,6 +2,7 @@
     max-width: 980px;
     margin: 230px auto 180px;
     text-align: center;
+   
     i{
         padding-top: 2rem;
     }
@@ -33,3 +34,30 @@ button {
         color: #3466e8; 
     }
 }}
+.wishlist-main-card{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:20px;
+    img{
+        max-width: 100%;
+        height: 160px;
+    }
+    h6{
+        font-size: 15px;
+    }
+    h5{
+        font-size: 13px;
+    }
+    button{
+        font-size: 15px;
+        padding: 0.5rem 1.5rem ;
+        border-radius: 0.2rem;
+    }
+}
+.nav_icon{
+    font-size: 12px;
+}
+.wishlist-card{
+    display: flex;
+    flex-direction: row;
+}

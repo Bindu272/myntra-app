@@ -37,7 +37,7 @@ const CartSummary:React.FC<CartSummaryProps> = ({ totalPrice }) => {
         <span className="text-danger">&#8377; {totalPrice}</span>
       </div>
       <div>
-        <button className="border w-100 pt-2 pb-2 btn-myntra fw-semibold rounded-1 mt-3">
+        <button className="border w-100 pt-2 pb-2 btn-myntra fw-semibold rounded-1 mt-3" style={{background:'#ff3f6c',color:'#ffff'}}>
           PLACE ORDER
         </button>
       </div>

@@ -24,13 +24,28 @@ const cartReducer = (state, action) => {
         ...state,
         items:action.payload,
       }
+      case 'REMOVE_ALL_FROM_CART':
+        return {
+          ...state,
+          items: [],
+        };
+      case 'ADD_TO_WISHLIST':
+        return{
+          ...state,
+          wishListItems:[...state.wishListItems, action.payload],
+        }
+        case 'REMOVE_FROM_WISHLIST':
+          return{
+            ...state,
+            wishListItems:state.wishListItems.filter(item=>item.id!==action.payload.id)
+          }
     default:
       return state;
   }
 };
 
 export const CartProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+  const [cart, dispatch] = useReducer(cartReducer, { items: [], wishListItems:[] });
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>
