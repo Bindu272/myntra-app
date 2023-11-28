@@ -53,9 +53,9 @@ signOut(auth)
 <div className='profileDropdownCard'>
 <div className='container'>
   <p>Welcome 
-     {/* <h6>{user?.users?.email}</h6>  */}
+     <h6>{user?.users?.displayName}</h6> 
   </p>
-  <p>To access account and manage order</p>
+  {/* <p>To access account and manage order</p> */}
   <button className='profileDropBtn' 
   onClick={handleSignOut}
   >{user ? 'Logout': 'Login / Sign up'}</button>
