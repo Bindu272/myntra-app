@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import './SignInPage.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { ValidateForm } from '../validate';
 import {auth} from '../Firebase'
@@ -9,7 +9,7 @@ import { addUser } from '../../Redux/userSlice';
 
 const SignInPage = () => {
   const dispatch = useDispatch();
-
+const navigate=useNavigate()
   const [isCreateAccount, setIsCreateAccount]=useState(true);
   const [loginErrMessage, setLoginErrMessage]=useState('');
 
@@ -19,9 +19,11 @@ const pass =  useRef(null);
 
 const handleSignUpForm = () =>{
   const errMessage = ValidateForm(email?.current?.value, pass?.current?.value);
-      setLoginErrMessage(errMessage)
+  console.log(errMessage, ":")
+      // setLoginErrMessage(errMessage)
   if(errMessage) return;
   if(isCreateAccount){
+  
   createUserWithEmailAndPassword(auth, email?.current?.value, pass?.current?.value)
   .then((userCredential) => {
     // Signed up 
@@ -30,7 +32,9 @@ const handleSignUpForm = () =>{
     updateProfile(user, {
       displayName: name.current.value
       // photoURL: 
-    }).then(() => {
+    })
+    // navigate('/')
+    .then(() => {
       // Profile updated!
       const{uid, email, displayName} = auth.currentUser;
       dispatch(
@@ -40,11 +44,15 @@ const handleSignUpForm = () =>{
           uid:uid
         })
       )
-      
+      alert('created account please login')
+      // navigate('/')
+      // eslint-disable-next-line no-restricted-globals
+      location.reload()
     }).catch((error) => {
       // An error occurred
       // ...
-      setLoginErrMessage(error.message);
+      setLoginErrMessage('signUp success');
+    
     });
     // ...
   })
@@ -53,23 +61,27 @@ const handleSignUpForm = () =>{
     const errorMessage = error.message;
     // ..
     setLoginErrMessage(errorCode+errMessage)
+   
   });
 }
 else{
   signInWithEmailAndPassword(auth, email.current.value, pass.current.value)
   .then((userCredential) => {
+   
     // Signed in 
     const user = userCredential.user;
     // ...
+    navigate('/')
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    setLoginErrMessage(errorCode+errMessage)
+    setLoginErrMessage(errorCode)
   });
 
 }
 }
+console.log( loginErrMessage, "<><><")
   return (
     <div className='sign-in-container'>
       <img className='img-responsive' src='./Images/signin.webp' alt='signinimg' />
@@ -82,7 +94,7 @@ else{
         
           <div className='form-group'>
           {isCreateAccount && ( <input  type='text' className='form-control mobileNumberInput' 
-           placeholder='Name' size={35}/>)}
+           placeholder='Name' size={35} ref={name}/>)}
          
             <input type='email' 
             ref={email}

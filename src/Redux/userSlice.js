@@ -8,10 +8,12 @@ const userSlice = createSlice(
     },
     reducers:{
         addUser:(state, action)=>{
-            state.users = action.payload;
+        state.users = action.payload;
         },
         removeUser:(state, action)=>{
-            return null;
+            if (state.users) {
+                state.users = state.users.filter(user => user.id !== action.payload.id);
+              }
         }
     }
 }

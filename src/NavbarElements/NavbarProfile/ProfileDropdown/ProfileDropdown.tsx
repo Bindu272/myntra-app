@@ -12,9 +12,12 @@ const user  = useSelector((store:any)=> store.user);
 const handleSignOut = () =>{
 const auth = getAuth();
 signOut(auth)
-.then(()=> {})
+.then(()=> {
+  // eslint-disable-next-line no-restricted-globals
+  location.reload()
+})
 .catch((error)=>{
-  // navigate('\error');
+
   console.log(error)
 })
   }
@@ -50,7 +53,7 @@ signOut(auth)
 <div className='profileDropdownCard'>
 <div className='container'>
   <p>Welcome 
-    {/* <h6>{user.users.email}</h6> */}
+     {/* <h6>{user?.users?.email}</h6>  */}
   </p>
   <p>To access account and manage order</p>
   <button className='profileDropBtn' 
