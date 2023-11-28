@@ -36,7 +36,7 @@ signOut(auth)
             photoURL: photoURL,
           })
         );
-        navigate("/");
+        // navigate("/");
       } else {
         dispatch(removeUser());
         navigate("/signInPage");

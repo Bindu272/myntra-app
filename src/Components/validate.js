@@ -6,7 +6,6 @@ export const ValidateForm = (email, password) => {
     // if(!validateName) return 'Please Enter the valid Name'
     if (!validateEmail) return "Please Enter the valid Email";
     if (!validatePassword) return "InCorrect Password";
-   
     return null;
   };
    
