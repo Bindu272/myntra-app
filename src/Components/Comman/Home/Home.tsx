@@ -3,6 +3,8 @@ import InviteHome from '../../Card/InviteCard/InviteCard'
 import DealOf from './Deal/DealOf'
 import TopPick from './Top/TopPick'
 import Brand from './brand/Brand'
+import ImgSlider from '../../Carousel/Carousel'
+import Footer from '../Footer/Footer'
 
 const Home = () => {
     const data1 = "deal of the day";
@@ -11,7 +13,8 @@ const Home = () => {
   return (
     <>
       <InviteHome/>
-    {/* <SimpleSlider/> */}
+   
+    <ImgSlider/>
     <h1 className="data">{data1}</h1>
   
     <DealOf/>
@@ -22,7 +25,7 @@ const Home = () => {
     
     <h1 className="data">{data2}</h1>
     <TopPick/>
-    
+    {/* <Footer/> */}
     </>
   
   )

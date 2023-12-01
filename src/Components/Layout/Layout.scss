@@ -2,7 +2,7 @@
       padding: 5rem 3rem;
       background: #ffffff;
       // background: linear-gradient(to bottom right,#feedf6,#fcf0e2);
-      height: 73vh;
+     max-height: auto;
       @media (max-width: 768px) {
             padding: 0;
       }

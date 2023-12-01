@@ -6,29 +6,36 @@
     right: 3rem;
     top: 4.4rem;
     height: 73%;
-    background-color: #fff;
+    background-color: #ffffff;
     z-index: 20;
     text-align: start;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
     p ,li{
-      color: #4d4747;
+      color:     #6c757d;
+    font-size: small;  
     }
     li{
-      padding-top: 7px;
+      padding-top: 4px;
     }
+    .dropdown-link{
+      color: #030303;
+      cursor: pointer;
+    }
+  
 }
+
 .container{
   padding: 1rem;
   
 }
+
 .profileDropBtn{
   background-color: transparent;
-  border: 1px solid #c5b3b6;
+  border: 1px solid #fa286e;
   padding: 9px 29px;
- 
+ color: #fa286e;
   font-size: small;
   font-weight: 600;
   cursor: pointer;
-  a{
-    color: #f0247d;
-  }
+  
 }

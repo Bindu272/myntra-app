@@ -29,6 +29,7 @@
 }
 .mobileInputContainer {
     position: relative;
+    padding: 0 0 44px 0;
 }
 .mobileInputContainer .form-group {
     margin-bottom: 24px;
@@ -74,11 +75,12 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 16px;
+    
 }
 .get-help {
     margin: 20px 0px;
     font-size: small;
-    padding: 0 0 44px 0;
+    cursor: pointer;
     font-weight: 600;
     color: rgba(40,44,63,.8);
 }
