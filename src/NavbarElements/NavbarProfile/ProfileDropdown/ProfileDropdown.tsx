@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../../Components/Firebase'
 import { addUser, removeUser } from '../../../Redux/userSlice'
-const ProfileDropdown = () => {
-const dispatch  =  useDispatch();
+interface ProfileDropdownProps {
+  handleLinkClick:any;
+}
+const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ handleLinkClick }) => {const dispatch  =  useDispatch();
 const navigate =  useNavigate();
 const user  = useSelector((store:any)=> store.user);
 const handleSignOut = () =>{
@@ -53,25 +55,25 @@ signOut(auth)
 <div className='profileDropdownCard'>
 <div className='container'>
   <p>Welcome 
-     <h6>{user?.users?.displayName}</h6> 
+     <h6 className='text-dark'>{user?.users?.displayName}</h6> 
   </p>
   {/* <p>To access account and manage order</p> */}
   <button className='profileDropBtn' 
   onClick={handleSignOut}
-  >{user ? 'Logout': 'Login / Sign up'}</button>
+>{user ? 'Logout': 'Login / Sign up'}</button>
   <hr></hr>
   
-    <li>Order</li>
-    <li>Wishlist</li>
+    <li className='dropdown-link' onClick={()=>handleLinkClick('/addToCart')}> Order</li>
+    <li className='dropdown-link' onClick={()=>handleLinkClick('/wishlistLogin')}>Wishlist</li>
     <li>Gift Card</li>
-    <li>Contact Us</li>
-    <li>Myntra insider</li>
+    <li className='dropdown-link' onClick={()=>handleLinkClick('/socialLinks')}>Contact Us</li>
+    <li className='dropdown-link' onClick={()=>handleLinkClick('/men')}>Men</li>
   <hr></hr>
  <li> Myntra Credit</li>
-<li>Coupons</li>
-<li>Saved Cards</li>
+<li className='dropdown-link' onClick={()=>handleLinkClick('/women')} >Women</li>
+<li> Saved Cards</li>
 <li>Saved VPA</li>
-<li>Saved Addresses</li>
+<li className='dropdown-link' onClick={()=>handleLinkClick('/beauty')}>Beauty</li>
 </div>
 </div>
     </div>

@@ -61,7 +61,7 @@ const calculateTotalPrice =(item:any, selectedOption:any)=>  (item.price* select
                   <h5 className="fs-6 fw-bold">ITEMS IN BAG</h5>
                 </div>
                 <div className="d-flex fw-bold text-secondary fs-6-override align-items-center">
-                  <div className="border-end border-2 pe-2">
+                  <div className="border-end border-2 pe-2 text-dark">
                     <span onClick={handleRemoveAll} style={{cursor:'pointer'}}>REMOVE</span>
                   </div>
                   <div className="ps-2">

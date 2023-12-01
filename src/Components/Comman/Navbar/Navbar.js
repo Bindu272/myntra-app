@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext} from "react";
 import './Navbar.scss'
 import Profileicon from "../../../NavbarElements/NavbarProfile/ProfileIcon/Profileicon";
 import { useLocation,useNavigate } from "react-router-dom";
@@ -9,8 +9,40 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../Firebase'
 import { addUser, removeUser } from '../../../Redux/userSlice'
+import { useCart } from "../../NavPages/AddToCartPage/CartContext";
 
 const Nav = () => {
+  const {cart}=useCart()
+  const cartItemCount = cart.items.length
+  const [searchTerm, setSearchTerm]=useState('')
+  const [suggetions, setSuggetions]=useState([])
+ const handleInputChange=(e)=>{
+  const term = e.target.value
+  setSearchTerm(term)
+  if (term.length >= 3) {
+    fetch(`https://fakestoreapi.com/products?title_like=${term}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Filter suggestions based on the input term
+        const filteredSuggestions = data.filter((suggestion) =>
+          suggestion.title.toLowerCase().includes(term.toLowerCase())
+        );
+
+        setSuggetions(filteredSuggestions.slice(0, 5)); // Show up to 5 suggestions
+      })
+      .catch((error) => console.error('Error fetching suggestions:', error));
+  } else {
+    // Clear suggestions if the search term is less than 3 characters
+   
+    setSuggetions([]);
+  }
+};
+
+ const handleSuggestionClick=(productId)=>{
+  navigate(`/product-detail-page/${productId}`);
+setSuggetions([]);
+    setSearchTerm('');
+ }
   const dispatch  =  useDispatch();
 const navigate =  useNavigate();
 const user  = useSelector((store)=> store.user);
@@ -76,10 +108,10 @@ signOut(auth)
           {/* <li className="nav_li nav_item1" onMouseEnter={()=>handleMouseEnter('men')}onMouseLeave={handleMouseLeave} >men </li> */}
        <li className="nav_li nav_item1">  <Link to='/men'>men</Link></li>
          <li className="nav_li nav_item1" ><Link to='/women'>women</Link></li>
-       <li className="nav_li nav_item1">kids</li>
+       <li className="nav_li nav_item1 text-secondary" >kids</li>
          <li className="nav_li nav_item1"><Link to='/electronic'>home & living</Link></li>
        <li className="nav_li nav_item1"> <Link to='/beauty'>beauty</Link></li>  
-          <li className="nav_li nav_item1 nav_new">studio <sup>NEW</sup></li>
+          <li className="nav_li nav_item1 nav_new text-secondary">studio <sup>NEW</sup></li>
         
           <li className="nav_li nav_item2"> 
             <input
@@ -87,10 +119,32 @@ signOut(auth)
               size={40}          
               type="text"
               placeholder= "Search for products, brand and more"
+              value={searchTerm}
+              onChange={handleInputChange}
              
             />
             <i className="fa-solid fa-magnifying-glass search_icon"></i>
           </li>
+          {/* {suggetions.length>0&&(<ul className="searchDropdownCard">
+            {suggetions.map((suggetion)=>(
+              <li key={suggetion.id} onClick={()=>handleSuggestionClick(suggetion.id)}>
+                {suggetion.title}
+              </li>
+            ))}
+          </ul>)} */}
+          {searchTerm.length >= 3 && suggetions.length > 0 && (
+  <ul className="searchDropdownCard">
+    {suggetions.map((suggestion) => (
+      <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion.id)}>
+        {suggestion.title}
+      </li>
+    ))}
+  </ul>
+)}
+
+{searchTerm.length >= 3 && suggetions.length === 0 && (
+  <div className="searchDropdownCard">No items found</div>
+)}
           {location.pathname !=='/signInPage' &&(
             <span className="nav_item3">
           <Profileicon />
@@ -102,12 +156,13 @@ signOut(auth)
             <i className="fa-solid fa-heart nav_icon"></i>
 
             <li className="nav_li "><Link to='/wishlistLogin'>Wishlist</Link> </li>
-          </span>
+          </span>  
           <span className="nav_item3">
-          
-            <i className="fa-solid fa-bag-shopping nav_icon"></i>
+        
+            <i className="fa-solid fa-bag-shopping nav_icon">{cartItemCount>0 && <sup  className="bagCount">{cartItemCount}</sup>}</i> 
             <li className="nav_li ">
-            <Link to='/addToCart'>Bag</Link></li>
+          
+            <Link to='/addToCart'>Bag </Link></li>
             
           </span>
        

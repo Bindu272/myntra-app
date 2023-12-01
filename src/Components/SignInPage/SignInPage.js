@@ -12,7 +12,8 @@ const SignInPage = () => {
 const navigate=useNavigate()
   const [isCreateAccount, setIsCreateAccount]=useState(true);
   const [loginErrMessage, setLoginErrMessage]=useState('');
-
+ 
+  const [successMessage, setSuccessMessage] = useState('');
 const name = useRef(null)
 const email =  useRef(null);
 const pass =  useRef(null);
@@ -44,14 +45,15 @@ const handleSignUpForm = () =>{
           uid:uid
         })
       )
-      alert('created account please login')
+      // alert('created account please login')
+      setSuccessMessage('Account created successfully. Please login.');
       // navigate('/')
       // eslint-disable-next-line no-restricted-globals
       location.reload()
     }).catch((error) => {
       // An error occurred
       // ...
-      setLoginErrMessage('signUp success');
+      setLoginErrMessage('signUp success Please Login');
     
     });
     // ...
@@ -70,6 +72,8 @@ else{
    
     // Signed in 
     const user = userCredential.user;
+    // alert('signed in')
+    setSuccessMessage('Signed in successfully.');
     // ...
     navigate('/')
   })
@@ -86,6 +90,7 @@ console.log( loginErrMessage, "<><><")
     <div className='sign-in-container'>
       <img className='img-responsive' src='./Images/signin.webp' alt='signinimg' />
       <div className='signInContainer'>
+      <div className='get-help' onClick={() => setIsCreateAccount(!isCreateAccount)}> <span>{isCreateAccount? 'Already have an account?' :'Dont have an account?'}</span> <span style={{color:"#ff3f6c"}}> {isCreateAccount ? ' Login' : 'Create Account'}</span> </div>
         <div className='welcome-header'>     {isCreateAccount ? 'Create Account' : 'Login'}{' '}
 
         </div>
@@ -114,17 +119,21 @@ console.log( loginErrMessage, "<><><")
          
           <div className='midLinks'>By continuing, I agree to the <span style={{color:"#ff3f6c"}}>Terms of use</span>  & <span style={{color:"#ff3f6c"}}>Privacy Policy</span> </div>
          
-         <p>{loginErrMessage}</p>
+        
+        
           <div className='submitBottomOption'  
           onClick={handleSignUpForm}
           > {isCreateAccount ? 'CONTINUE' : 'LOGIN'}</div>
-
+ 
+ 
 
         </div>
         </form>
-        <div className='get-help' onClick={() => setIsCreateAccount(!isCreateAccount)}> <span>{isCreateAccount? 'Already have an account?' :'Dont have an account?'}</span> <span style={{color:"#ff3f6c"}}> {isCreateAccount ? ' Login' : 'Create Account'}</span> </div>
+        
        
       </div>
+      <div className='success-message'>{successMessage}</div>
+      <div className='error-message'>{loginErrMessage}</div>
     </div>
   );
 }
