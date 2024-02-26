@@ -4,12 +4,13 @@ import DealOf from './Deal/DealOf'
 import TopPick from './Top/TopPick'
 import Brand from './brand/Brand'
 import ImgSlider from '../../Carousel/Carousel'
-import Footer from '../Footer/Footer'
+
 
 const Home = () => {
     const data1 = "deal of the day";
     const data2 = "top picks";
     const data4 = "new in top brands";
+  
   return (
     <>
       <InviteHome/>
@@ -25,7 +26,7 @@ const Home = () => {
     
     <h1 className="data">{data2}</h1>
     <TopPick/>
-    {/* <Footer/> */}
+
     </>
   
   )

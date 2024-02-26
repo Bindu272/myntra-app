@@ -10,35 +10,45 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../Firebase'
 import { addUser, removeUser } from '../../../Redux/userSlice'
 import { useCart } from "../../NavPages/AddToCartPage/CartContext";
+import axios from "axios";
 
 const Nav = () => {
   const {cart}=useCart()
   const cartItemCount = cart.items.length
   const [searchTerm, setSearchTerm]=useState('')
   const [suggetions, setSuggetions]=useState([])
+
+ const fetchSuggetions=(e)=>{
+  
+    axios
+    .get(`https://fakestoreapi.com/products?title_like=${searchTerm}`)
+      .then((response)=>{
+        const data=response.data
+        const filteredSuggestions = data.filter((suggestion)=>suggestion.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        setSuggetions(filteredSuggestions.slice(0,5))
+      })
+      .catch((error)=>console.error('Error fetching suggetions:', error))
+
+    
+    }
+ 
+ useEffect(()=>{
+  const delayDebounceFn=setTimeout(()=>{
+if (searchTerm.length>=3){
+  fetchSuggetions()
+ } else{
+  setSuggetions([])
+  }
+},2000)
+  return()=>clearTimeout(delayDebounceFn)
+ },[searchTerm])
+
  const handleInputChange=(e)=>{
   const term = e.target.value
   setSearchTerm(term)
-  if (term.length >= 3) {
-    fetch(`https://fakestoreapi.com/products?title_like=${term}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Filter suggestions based on the input term
-        const filteredSuggestions = data.filter((suggestion) =>
-          suggestion.title.toLowerCase().includes(term.toLowerCase())
-        );
-
-        setSuggetions(filteredSuggestions.slice(0, 5)); // Show up to 5 suggestions
-      })
-      .catch((error) => console.error('Error fetching suggestions:', error));
-  } else {
-    // Clear suggestions if the search term is less than 3 characters
-   
-    setSuggetions([]);
-  }
-};
-
- const handleSuggestionClick=(productId)=>{
+ }
+    const handleSuggestionClick=(productId)=>{
   navigate(`/product-detail-page/${productId}`);
 setSuggetions([]);
     setSearchTerm('');
@@ -81,15 +91,7 @@ signOut(auth)
     };
   }, [dispatch, navigate]);
   
-  const [activeItem, setActiveItem] = useState()
 
-  // const handleMouseEnter = (item) => {
-  //   setActiveItem(item);
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setActiveItem(null);
-  // };
   const location=useLocation();
   return (
     <>
@@ -105,7 +107,7 @@ signOut(auth)
             ></img></Link>
            
           </li>
-          {/* <li className="nav_li nav_item1" onMouseEnter={()=>handleMouseEnter('men')}onMouseLeave={handleMouseLeave} >men </li> */}
+        
        <li className="nav_li nav_item1">  <Link to='/men'>men</Link></li>
          <li className="nav_li nav_item1" ><Link to='/women'>women</Link></li>
        <li className="nav_li nav_item1 text-secondary" >kids</li>
@@ -125,13 +127,6 @@ signOut(auth)
             />
             <i className="fa-solid fa-magnifying-glass search_icon"></i>
           </li>
-          {/* {suggetions.length>0&&(<ul className="searchDropdownCard">
-            {suggetions.map((suggetion)=>(
-              <li key={suggetion.id} onClick={()=>handleSuggestionClick(suggetion.id)}>
-                {suggetion.title}
-              </li>
-            ))}
-          </ul>)} */}
           {searchTerm.length >= 3 && suggetions.length > 0 && (
   <ul className="searchDropdownCard">
     {suggetions.map((suggestion) => (
