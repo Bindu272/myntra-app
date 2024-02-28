@@ -3,6 +3,7 @@ import axios from 'axios';
 import './NavPageProduct.scss'
 import { Link } from 'react-router-dom';
 import { useCart } from '../AddToCartPage/CartContext';
+import { api } from '../../../API';
 
 interface Product {
   id: number;
@@ -26,7 +27,7 @@ const NavPageProduct: React.FC<NavProductProps> = ({ category }) => {
   const wishListItems=cart.wishListItems
   useEffect(() => {
 
-    const apiUrl = `https://fakestoreapi.com/products/category/${category}`;
+    const apiUrl = `${api}/category/${category}`;
 
 
     axios.get(apiUrl)

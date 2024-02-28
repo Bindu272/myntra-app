@@ -36,7 +36,7 @@ const handleSignUpForm = () =>{
     })
     // navigate('/')
     .then(() => {
-      // Profile updated!
+
       const{uid, email, displayName} = auth.currentUser;
       dispatch(
         addUser({
@@ -46,13 +46,11 @@ const handleSignUpForm = () =>{
         })
       )
       alert('created account please login')
-      // setSuccessMessage('Account created successfully. Please login.');
-      // navigate('/')
+
       // eslint-disable-next-line no-restricted-globals
       location.reload()
     }).catch((error) => {
-      // An error occurred
-      // ...
+
       setLoginErrMessage('signUp success Please Login');
     
     });

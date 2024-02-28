@@ -11,6 +11,7 @@ import { auth } from '../../Firebase'
 import { addUser, removeUser } from '../../../Redux/userSlice'
 import { useCart } from "../../NavPages/AddToCartPage/CartContext";
 import axios from "axios";
+import { api } from "../../../API";
 
 const Nav = () => {
   const {cart}=useCart()
@@ -19,9 +20,10 @@ const Nav = () => {
   const [suggetions, setSuggetions]=useState([])
 
  const fetchSuggetions=(e)=>{
+
   
     axios
-    .get(`https://fakestoreapi.com/products?title_like=${searchTerm}`)
+    .get(`${api}?title_like=${searchTerm}`)
       .then((response)=>{
         const data=response.data
         const filteredSuggestions = data.filter((suggestion)=>suggestion.title.toLowerCase().includes(searchTerm.toLowerCase())
