@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './ProductDetailPage.scss'
 import { useCart, } from '../../Components/NavPages/AddToCartPage/CartContext';
+import { api } from '../../API';
 
 interface Product {
     id: number;
@@ -42,7 +43,7 @@ const handleAddToWishList = (product: Product) => {
 
     useEffect(() => {
         axios
-            .get(`https://fakestoreapi.com/products/${productId}`)
+            .get(`${api}/${productId}`)
             .then((response) => {
                 setProduct(response.data);
             })
